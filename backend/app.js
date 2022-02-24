@@ -65,7 +65,7 @@ app.post("/closeDoor", async (req, res) => {
 	res("Door Closed");
 });
 
-app.post("/doorPosition", async (req, res) => {
+app.get("/doorPosition", async (req, res) => {
 	console.log("Door is open halfway");
 	res("Door is open halfway");
 });
