@@ -44,8 +44,9 @@ app.use(function (err, req, res, next) {
 
 module.exports = app;
 
+initialLoad();
 /**
- * @desc Quick script that runs whenever the app starts, to get me some info in logs
+ * @desc How I know the backend has started/restarted
  */
 async function initialLoad() {
 	if (process.env.NODE_ENV != "development") {
@@ -53,4 +54,18 @@ async function initialLoad() {
 	}
 	console.log(`[initialLoad] ${process.env.NODE_ENV} env, listen on ${port}`);
 }
-initialLoad();
+
+app.post("/openDoor", async (req, res) => {
+	console.log("Opening Door...");
+	res("Door Opened");
+});
+
+app.post("/closeDoor", async (req, res) => {
+	console.log("Closing Door...");
+	res("Door Closed");
+});
+
+app.post("/doorPosition", async (req, res) => {
+	console.log("Door is open halfway");
+	res("Door is open halfway");
+});
