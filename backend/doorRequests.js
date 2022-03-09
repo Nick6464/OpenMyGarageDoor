@@ -1,33 +1,33 @@
 const dotenv = require("dotenv");
 dotenv.config();
+const fetch = require("node-fetch");
+
 const { NODE_ENV, PI_ADDRESS, PI_ADDRESS_DEV } = process.env;
 
 const API = NODE_ENV == "development" ? PI_ADDRESS_DEV : PI_ADDRESS;
 
 exports.sendOpenRequest = sendOpenRequest;
 async function sendOpenRequest() {
-	let status = await this.APIGET("/openDoor");
+	let status = await APIGET("/openDoor");
 	return status;
 }
 
 exports.sendCloseRequest = sendCloseRequest;
 async function sendCloseRequest() {
-	let status = await this.APIGET("/closeDoor");
+	let status = await APIGET("/closeDoor");
 	return status;
 }
 
-exports.doorPosition = doorPosition;
-async function doorPosition() {
-	let pos = await this.APIGET("/position");
+exports.sendStatusRequest = sendStatusRequest;
+async function sendStatusRequest() {
+	let pos = await APIGET("/position");
 	return pos;
 }
-
-
 
 APIGET = async (urlEnd) => {
 	return new Promise(async (res, rej) => {
 		const url = `${API}${urlEnd}`;
-		this.fetchWithTimeout(url, {
+		fetchWithTimeout(url, {
 			headers: {
 				"content-type": "application/json",
 			},
@@ -39,7 +39,7 @@ APIGET = async (urlEnd) => {
 			.then((response) => response.json())
 			.then(res)
 			.catch((e) => {
-				this.APIerrHandler(e, rej);
+				APIerrHandler(e, rej);
 			});
 	});
 };
@@ -61,7 +61,7 @@ APIerrHandler = (e, rej) => {
 	if (e == "TypeError: Failed to fetch") {
 		console.log("Disconnected...");
 	} else {
-		rej("Door failed to be opened");
+		rej(e);
 	}
 	rej(e.statusText);
 };
