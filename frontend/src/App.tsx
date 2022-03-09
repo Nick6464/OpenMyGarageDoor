@@ -1,11 +1,22 @@
 import React from "react";
 
-const App: React.FC = () => {
-  return (
-    <div>
+
+function App() {
+
+  //const state variables
+
+  
+
+
+  return(
+    <div className="App"> 
       
+    
     </div>
-  );
-};
+
+
+  )
+
+}
 
 export default App;
