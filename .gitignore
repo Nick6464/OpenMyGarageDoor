@@ -1,3 +1,4 @@
 
 backend/.env
 pi-backend/.env
+backend/node_modules/
