@@ -1,4 +1,8 @@
 import { createTheme } from "@mui/material/styles";
+/**
+ * Theme.tsx
+ *  Component for theme managment.
+ */
 
 const darkTheme = createTheme ({
   palette: {
