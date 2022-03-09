@@ -1,4 +1,5 @@
-from flask import Flask
+import json
+from flask import Flask, make_response, jsonify
 from random import seed
 from random import random
 
@@ -8,18 +9,22 @@ app = Flask(__name__)
 
 @app.route("/openDoor")
 def openDoor():
-    return randomBool()
+    print("/openDoor Started")
+    return make_response(jsonify({"complete": randomBool()}))
 
 
 @app.route("/closeDoor")
 def closeDoor():
-    return randomBool()
+    print("/closeDoor Started")
+    return make_response(jsonify({"complete": randomBool()}))
 
 
 @app.route("/position")
 def position():
+    print("/postion Started")
     status = int(random() * 100)
-    return status
+    print(status)
+    return make_response(jsonify({"position": status}))
 
 
 # Utility Functions
