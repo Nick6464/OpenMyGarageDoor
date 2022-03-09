@@ -10,6 +10,8 @@ var usersRouter = require("./routes/users");
 
 const dotenv = require("dotenv");
 
+const door = require("./doorRequests.js");
+
 var app = express();
 
 // view engine setup
@@ -57,15 +59,20 @@ async function initialLoad() {
 
 app.post("/openDoor", async (req, res) => {
 	console.log("Opening Door...");
-	res("Door Opened");
+	let request = await door.sendOpenRequest();
+	console.log(request);
+	res({ complete: request });
 });
 
 app.post("/closeDoor", async (req, res) => {
 	console.log("Closing Door...");
+	let request = await door.sendCloseRequest();
 	res("Door Closed");
 });
 
 app.post("/doorPosition", async (req, res) => {
-	console.log("Door is open halfway");
-	res("Door is open halfway");
+	console.log("Getting Door Status...");
+	let position = await door.sendStatusRequest();
+	console.log(position);
+	res({ position: position });
 });
